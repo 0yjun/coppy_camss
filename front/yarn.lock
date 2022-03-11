@@ -376,7 +376,7 @@
   dependencies:
     "color-convert" "^2.0.1"
 
-"antd@^4.18.3":
+"antd@^4.19.1":
   "integrity" "sha512-bPy/MSLzJGcHQH549B3WpTRitt1O3b35cD6UhAR+4AhKZjFmOqNc+gSUY5j+IsaKfdv+FeOGmUOqAr2jrc3Oyg=="
   "resolved" "https://registry.npmjs.org/antd/-/antd-4.19.1.tgz"
   "version" "4.19.1"
@@ -2303,6 +2303,11 @@
   "integrity" "sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA=="
   "resolved" "https://registry.npmjs.org/styled-jsx/-/styled-jsx-5.0.0.tgz"
   "version" "5.0.0"
+
+"styled@^1.0.0":
+  "integrity" "sha1-S0/ztd8GEBaHCr/XF3/2kW6u3GA="
+  "resolved" "https://registry.npmjs.org/styled/-/styled-1.0.0.tgz"
+  "version" "1.0.0"
 
 "supports-color@^5.3.0":
   "integrity" "sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow=="

@@ -11,7 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.8.0",
-    "antd": "^4.18.3",
+    "antd": "^4.19.1",
     "axios": "^0.24.0",
     "faker": "^6.6.6",
     "immer": "^9.0.12",
@@ -27,6 +27,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
     "shortid": "^2.2.16",
+    "styled": "^1.0.0",
     "styled-components": "^5.3.3",
     "upgrade": "^1.1.0"
   },

@@ -9,7 +9,7 @@ const MyApp = ({ Component }) => {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>nodebird</title>
+        <title>COPPY_CAMSS</title>
       </Head>
       <Component />
     </>

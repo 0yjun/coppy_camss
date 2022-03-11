@@ -5,17 +5,21 @@ import styles from '../styles/Home.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginRequest } from '../module/slice/user';
 import AppLayout from '../component/AppLayout';
-import Router from 'next/router';
 
 export default function Home() {
-  const { me } = useSelector(state => state.user);
+  const users = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!me) {
-      Router.replace('/login');
-    }
-  }, [me]);
+  const login = useCallback(data => {
+    dispatch(loginRequest(data));
+  }, []);
 
-  return <AppLayout></AppLayout>;
+  useEffect(() => {
+    console.log('user', users);
+  }, [users]);
+  return (
+    <AppLayout>
+      <button onClick={login}>login</button>
+    </AppLayout>
+  );
 }

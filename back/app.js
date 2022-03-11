@@ -1,6 +1,14 @@
 const express = require("express");
-const app = express();
+const cors = require("cors");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const path = require("path");
 
+const userRouter = require("./routes/user");
+const app = express();
 /*      [ PART 1 ]
         db설정
 */
@@ -35,6 +43,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 */
 //app.use("/post", postRouter);
 //app.use("/posts", postsRouter);
+app.get("/", (req, res) => {
+  res.send("hello express");
+});
 app.use("/user", userRouter);
 
 app.listen(4000, () => {
