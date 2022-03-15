@@ -1,5 +1,5 @@
 import faker from '@faker-js/faker';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
   data: Array(10)
@@ -22,14 +22,11 @@ export const comnSlice = createSlice({
       });
     },
     comnChange: (state, data) => {
-      var value = data.payload.value;
-      var columnId = data.payload.cell.column.id;
-      var rowidx = data.payload.cell.row.id;
-      state.data[rowidx].columnId = value;
-      console.log('columnId : ', columnId);
-      console.log('rowidx : ', rowidx);
-      console.log('value : ', value);
-      console.log('state.data[rowidx].columnId : ', state.data[rowidx].columnId);
+      const value = data.payload.value;
+      const columnId = data.payload.cell.column.id;
+      const rowidx = data.payload.cell.row.id;
+      let trgObj = state.data[rowidx];
+      trgObj[columnId] = value;
     },
   },
 });
