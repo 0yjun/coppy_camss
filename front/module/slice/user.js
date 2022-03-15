@@ -43,11 +43,13 @@ export const userSlice = createSlice({
     },
     /* signUp*/
     signUpRequest: (state, data) => {
+      console.log('signUpRequest : ', data);
       state.signUpLoading = true;
       state.signUpDone = false;
       state.signUpError = null;
     },
     signUpSuccess: (state, data) => {
+      console.log('signup success');
       state.signUpLoading = false;
       state.signUpDone = true;
       state.signUpError = null;
@@ -69,6 +71,7 @@ export const {
   logoutSuccess,
   logoutFailure,
   signUpRequest,
+  signUpSuccess,
   signUpFailure,
 } = actions;
 export default reducer;

@@ -10,18 +10,23 @@ function comncode() {
     {
       accessor: 'rowIdx',
       Header: 'RowIdx',
+      type: 'text',
     },
     {
       accessor: 'rowType',
       Header: 'RowType',
+      type: 'text',
     },
   ]);
   const comnCode = useSelector(state => state.common.data);
-  for (let key in comnCode[comnCode.length - 1]) {
-    console.log(key);
+  const props = useSelector(state => state.common.props);
+  console.log(props);
+  for (let key in props) {
+    console.log(props[key].cd);
     columns.push({
-      accessor: key,
-      Header: key,
+      accessor: props[key].cd,
+      Header: props[key].cd,
+      type: props[key].type,
     });
   }
 

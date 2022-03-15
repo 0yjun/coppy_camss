@@ -52,6 +52,7 @@ function Table({ data, columns }) {
                   return (
                     <td onClick={() => onClick(cell)} {...cell.getCellProps()}>
                       <Input
+                        type={cell.column.type}
                         onChange={e => onChange(e, cell)}
                         readOnly={['RowIdx', 'RowType'].includes(cell.column.Header)}
                         value={cell.column.Header === 'RowIdx' ? cell.row.id : cell.value}></Input>

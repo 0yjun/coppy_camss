@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Radio } from 'antd';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -22,6 +22,7 @@ const AuthForm = ({ type }) => {
   const [password, onChangePassword] = useInput('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [passwordChk, setPasswordChk] = useState('');
+  const [userType, onChangeUserType] = useInput('');
   const [term, setTerm] = useState('');
   const [termError, setTermError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -29,6 +30,7 @@ const AuthForm = ({ type }) => {
 
   const onChangephoneNumber = useCallback(
     e => {
+      console.log('onChangephoneNumber : ', phoneNumber);
       const regex = /^[0-9\b -]{0,13}$/;
       if (regex.test(e.target.value)) {
         if (e.target.value.length < 10) {
@@ -65,9 +67,18 @@ const AuthForm = ({ type }) => {
       if (!term) {
         return setTermError(true);
       }
-      dispatch(signUpRequest({ email: email, password: password }));
+
+      dispatch(
+        signUpRequest({
+          email: email,
+          password: password,
+          nickname: nickname,
+          phoneNumber: phoneNumber,
+          userType: userType,
+        }),
+      );
     }
-  }, [email, password, passwordChk, term]);
+  }, [email, password, passwordChk, term, nickname, phoneNumber, userType]);
 
   return (
     <>
@@ -104,18 +115,32 @@ const AuthForm = ({ type }) => {
               <br />
               <Input
                 name="phoneNumber"
-                type="tel"
+                type="text"
                 value={phoneNumber}
                 required
                 onChange={onChangephoneNumber}
                 placeholder="00*-000*-0000"
-                pattern="/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/"
+                //pattern="/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/"
                 maxLength="13"></Input>
             </div>
             <div>
               <label htmlFor="nickname">닉네임</label>
               <br />
               <Input name="nickname" type="text" value={nickname} required onChange={onchangeNickname}></Input>
+            </div>
+            <div>
+              <label htmlFor="user-type">타입</label>
+              <br />
+              <Radio.Group
+                name="user-type"
+                optionType="button"
+                buttonStyle="solid"
+                value={userType}
+                onChange={onChangeUserType}
+                options={[
+                  { label: '섭외자', value: '1' },
+                  { label: '영업자', value: '2' },
+                ]}></Radio.Group>
             </div>
             <div>
               <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>

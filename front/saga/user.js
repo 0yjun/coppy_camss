@@ -1,13 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { all, fork, delay, put, takeLatest, call } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import {
   loginRequest,
   loginSuccess,
   loginFailure,
-  logoutRequest,
-  logoutSuccess,
-  logoutFailure,
   signUpSuccess,
   signUpFailure,
   signUpRequest,
@@ -35,7 +32,8 @@ function signUpAPI(data) {
 
 function* signUp(action) {
   try {
-    const result = yield call(signUpAPI, action.data);
+    const result = yield call(signUpAPI, action.payload);
+    console.log('result : ', result);
     yield put(signUpSuccess(result));
   } catch (error) {
     console.error('error : ', error);

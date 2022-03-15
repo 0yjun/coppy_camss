@@ -6,13 +6,19 @@ const passport = require("passport");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
-
-const userRouter = require("./routes/user");
+const db = require('./models');
+const userRouter = require('./routes/user');
 const app = express();
 /*      [ PART 1 ]
         db설정
 */
-
+console.log(db);
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log('db 연결 성공!');
+  })
+  .catch(console.error);
 /*      [ PART 2 ]
         express 설정
 */
