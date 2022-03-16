@@ -4,35 +4,40 @@ import Table from '../component/Table';
 import faker, { Faker } from '@faker-js/faker';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { Button } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 function comncode() {
-  const columns = useMemo(() => [
-    {
-      accessor: 'rowIdx',
-      Header: 'RowIdx',
-      type: 'text',
-    },
-    {
-      accessor: 'rowType',
-      Header: 'RowType',
-      type: 'text',
-    },
-  ]);
-  const comnCode = useSelector(state => state.common.data);
-  const props = useSelector(state => state.common.props);
-  console.log(props);
-  for (let key in props) {
-    console.log(props[key].cd);
-    columns.push({
-      accessor: props[key].cd,
-      Header: props[key].cd,
-      type: props[key].type,
+  const dispatch = useDispatch();
+  console.log(
+    'getinitial : ',
+    useSelector(state => state.common),
+  );
+  const { data: comnCdMainData, props: comnCdMainProps } = useSelector(state => state.common);
+  const comnCdMainColumn = [];
+  for (let key in comnCdMainProps) {
+    console.log(comnCdMainProps[key].cd);
+    comnCdMainColumn.push({
+      accessor: comnCdMainProps[key].cd,
+      Header: comnCdMainProps[key].cd,
+      type: comnCdMainProps[key].type,
+    });
+  }
+
+  const { data: comnCdDetailData, props: ccomnCdDetailProps } = useSelector(state => state.common);
+  const comnCdDetailColumn = [];
+  for (let key in ccomnCdDetailProps) {
+    console.log(ccomnCdDetailProps[key].cd);
+    comnCdDetailColumn.push({
+      accessor: ccomnCdDetailProps[key].cd,
+      Header: ccomnCdDetailProps[key].cd,
+      type: ccomnCdDetailProps[key].type,
     });
   }
 
   return (
     <AppLayout>
-      <Table columns={columns} data={comnCode} />
+      <Table columns={comnCdMainColumn} data={comnCdMainData} name="ComnCdM" />
+      <Table columns={comnCdDetailColumn} data={comnCdDetailData} name="ComnCdM" />
     </AppLayout>
   );
 }

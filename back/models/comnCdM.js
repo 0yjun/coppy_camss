@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     'comnCdM',
     {
       upCd: { type: DataTypes.STRING(20), allowNull: false, unique: true },
-      cd: { type: DataTypes.STRING(20), allowNull: false, unique: true },
+      cd: { type: DataTypes.STRING(20), primaryKey: true, allowNull: false, unique: true },
       cdNm: { type: DataTypes.STRING(100), allowNull: false, unique: true },
-      useYn: { type: DataTypes.STRING(20), allowNull: false },
+      useYn: { type: DataTypes.STRING(20), allowNull: true, defaultValue: '1' },
     },
     {
       charset: 'utf8',

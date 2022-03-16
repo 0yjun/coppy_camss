@@ -7,7 +7,7 @@ console.log('config : ' + config);
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 console.log('sequelize is ', sequelize);
 db.User = require('./user')(sequelize, Sequelize);
-db.comnCdM = require('./comnCdM')(sequelize, Sequelize);
+db.ComnCdM = require('./comnCdM')(sequelize, Sequelize);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

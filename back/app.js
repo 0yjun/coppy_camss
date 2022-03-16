@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const path = require("path");
 const db = require('./models');
 const userRouter = require('./routes/user');
+const commonRouter = require('./routes/common');
 const app = express();
 /*      [ PART 1 ]
         db설정
@@ -24,11 +25,11 @@ db.sequelize
 */
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: 'http://localhost:3000',
     credentials: true,
-  })
+  }),
 );
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 dotenv.config();
 //front 요청 데이터를 req로 받음
 app.use(express.json()); //front json
@@ -37,8 +38,8 @@ app.use(
   session({
     saveUninitialized: false,
     resave: false,
-    secret: "nodebirdsecret",
-  })
+    secret: 'nodebirdsecret',
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,10 +50,11 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 */
 //app.use("/post", postRouter);
 //app.use("/posts", postsRouter);
-app.get("/", (req, res) => {
-  res.send("hello express");
+app.get('/', (req, res) => {
+  res.send('hello express');
 });
-app.use("/user", userRouter);
+app.use('/user', userRouter);
+app.use('/common', commonRouter);
 
 app.listen(4000, () => {
   console.log("4000port run");

@@ -4,11 +4,13 @@ import ButtonGroup from 'antd/lib/button/button-group';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTable, useGlobalFilter, useSortBy, useRowSelect } from 'react-table';
-import { comnAdd, comnChange } from '../module/slice/common';
+import styled from 'styled-components';
+import { comnAdd, comnChange, comnFindRequest, comnSaveRequest } from '../module/slice/common';
+import TableScrollbar from 'react-table-scrollbar';
 
-function Table({ data, columns }) {
+function Table(props) {
+  const { data, columns, name } = props;
   const dispatch = useDispatch();
-  const [rowData, setRowData] = useState(data);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
       columns,
@@ -17,13 +19,18 @@ function Table({ data, columns }) {
     useRowSelect,
   );
 
-  const onInsert = () => {
+  const onAdd = () => {
     dispatch(comnAdd());
   };
-  const onClick = cell => {
-    console.log('onclick run row', cell.row.id);
+  const comnFind = () => {
+    console.log(name);
+    dispatch(comnFindRequest(name));
   };
-  useEffect(() => {}, []);
+  const comnSave = () => {
+    console.log(name);
+    dispatch(comnSaveRequest({ name: name, data: data }));
+  };
+
   const onChange = useCallback((e, cell) => {
     console.log('e : ', e.target.value);
     dispatch(comnChange({ value: e.target.value, cell: cell }));
@@ -31,39 +38,44 @@ function Table({ data, columns }) {
   return (
     <>
       <ButtonGroup>
-        <Button onClick={onInsert}>생성</Button>
+        <Button onClick={onAdd}>생성</Button>
+        <Button onClick={comnFind}>조회</Button>
+        <Button onClick={comnSave}>저장</Button>
       </ButtonGroup>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return (
-                    <td onClick={() => onClick(cell)} {...cell.getCellProps()}>
-                      <Input
-                        type={cell.column.type}
-                        onChange={e => onChange(e, cell)}
-                        readOnly={['RowIdx', 'RowType'].includes(cell.column.Header)}
-                        value={cell.column.Header === 'RowIdx' ? cell.row.id : cell.value}></Input>
-                    </td>
-                  );
-                })}
+
+      <TableScrollbar height="200px">
+        <table {...getTableProps()}>
+          <thead style={{ backgroundColor: 'gray' }}>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        <Input
+                          type={cell.column.type}
+                          onChange={e => onChange(e, cell)}
+                          readOnly={['rowIdx', 'rowType'].includes(cell.column.Header)}
+                          value={cell.column.Header === 'rowIdx' ? cell.row.id : cell.value}></Input>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </TableScrollbar>
     </>
   );
 }
