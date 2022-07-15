@@ -34,6 +34,7 @@
     "@types/redux-logger": "^3.0.9",
     "antd": "^4.21.5",
     "axios": "^0.27.2",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -43,5 +44,9 @@
     "redux-logger": "^3.0.6",
     "styled-components": "^5.3.5",
     "ts-node": "^10.8.2"
-  }
+  },
+  "proxy": [
+    "http://localhost:4000",
+    "http://localhost:3000"
+  ]
 }
