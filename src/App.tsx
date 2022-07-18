@@ -4,12 +4,8 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { UserService } from './service/userService';
 import { AppDispatch } from './store';
 import AuthForm from '../component/AuthForm';
-<<<<<<< HEAD
-import Setting from './Setting';
-
-=======
 import { useSelector } from 'react-redux';
->>>>>>> 7f5a3d3c94cb8da1ea9d050ca54ef8c42ce8bed8
+import isAdmin from './lib/hook/isAdmin';
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -22,14 +18,16 @@ const App = () => {
     getUser();
   }, []);
 
+  const { userData, loginLoading } = useSelector((state: any) => state.user);
+  const [value, bool] = isAdmin();
+  console.log('bool : ', bool);
+
   return (
-    <Setting>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/auth" element={<AuthForm />} />
-        </Routes>
-      </BrowserRouter>
-    </Setting>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<AuthForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 export default App;
