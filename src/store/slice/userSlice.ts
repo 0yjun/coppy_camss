@@ -3,7 +3,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import { UserService } from '../../service/userService';
 const initialState = {
-  userData: null,
+  userData: [],
+  loginError: {},
+  loginLoading: false,
 };
 
 export const userSlice = createSlice({
@@ -11,15 +13,20 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(UserService.getUser.pending, (state, action) => {
+    builder.addCase(UserService.login.pending, (state, action) => {
       console.log('pending');
+      state.loginLoading = true;
     });
-    builder.addCase(UserService.getUser.fulfilled, (state, action) => {
-      console.log('fulfilled');
+    builder.addCase(UserService.login.fulfilled, (state, action) => {
+      console.log(' action.payload ', action.payload);
+      state.userData = action.payload;
+      state.loginLoading = false;
       console.log('UserService.getUser : ', UserService.getUser);
     });
-    builder.addCase(UserService.getUser.rejected, (state, action) => {
-      console.log('rejected');
+    builder.addCase(UserService.login.rejected, (state, action) => {
+      state.loginLoading = false;
+      state.userData = [];
+      state.loginError = action.error;
     });
   },
 });
