@@ -11,6 +11,7 @@ export const UserService = {
   login: createAsyncThunk(
     'user/login',
     async (loginData, { rejectWithValue }) => {
+      console.log('loginData is ', loginData);
       try {
         const response = await client.post(`/user/login`, loginData);
         console.log('response is ', response);
