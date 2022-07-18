@@ -8,10 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function comncode() {
   const dispatch = useDispatch();
-  console.log(
-    'getinitial : ',
-    useSelector(state => state.common),
-  );
+  const common = useSelector(state => state.common);
+  console.log('common is ', common);
   const { data: comnCdMainData, props: comnCdMainProps } = useSelector(state => state.common);
   const comnCdMainColumn = [];
   for (let key in comnCdMainProps) {

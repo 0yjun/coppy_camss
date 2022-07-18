@@ -3,7 +3,9 @@ import { Button, Input, Form } from 'antd';
 import useInput from '../src/lib/hook/useInput';
 import { useDispatch } from 'react-redux';
 import { UserService } from '../src/service/userService';
-
+import StyledInput from '../src/lib/styledComponent/StyledInput';
+import WhiteBox from '../src/lib/styledComponent/WhiteBox';
+import TemplateBlock from '../src/lib/styledComponent/TemplateBlock';
 const FormWrapper = styled(Form)`
   padding: 10px;
 `;
@@ -17,28 +19,32 @@ const AuthForm = () => {
     dispatch(UserService.login({ email: email, password: password }));
   };
   return (
-    <FormWrapper onFinish={onSubmitForm}>
-      <h3>로그인</h3>
-      <Input
-        name="user-email"
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={onChangeEmail}
-        required
-      />
-      <Input
-        name="password"
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={onChangePassword}
-        required
-      />
-      <Button type="primary" htmlType="submit">
-        로그인
-      </Button>
-    </FormWrapper>
+    <TemplateBlock>
+      <WhiteBox>
+        <FormWrapper onFinish={onSubmitForm}>
+          <h3>로그인</h3>
+          <StyledInput
+            name="user-email"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={onChangeEmail}
+            required
+          />
+          <StyledInput
+            name="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={onChangePassword}
+            required
+          />
+          <Button type="primary" htmlType="submit">
+            로그인
+          </Button>
+        </FormWrapper>
+      </WhiteBox>
+    </TemplateBlock>
   );
 };
 export default AuthForm;

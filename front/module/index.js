@@ -1,17 +1,18 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 import user from './slice/user';
-import common, { getInitialState } from './slice/common';
+import common from './slice/common';
+import commonMain from './slice/commonMain';
 
 const rootReducer = (state, action) => {
-  console.log('reducer in root getInitialState : ', getInitialState);
+  console.log('typeof common : ', typeof common);
   switch (action.type) {
     case HYDRATE:
       return action.payload;
     default:
       const combineReducer = combineReducers({
         user,
-        common,
+        common: common,
       });
       return combineReducer(state, action);
   }
