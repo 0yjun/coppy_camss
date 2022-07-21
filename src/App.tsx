@@ -6,6 +6,7 @@ import { AppDispatch } from './store';
 import AuthForm from '../component/AuthForm';
 import { useSelector } from 'react-redux';
 import isAdmin from './lib/hook/isAdmin';
+import Navbar from '../component/Navbar';
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -24,9 +25,11 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/auth" element={<AuthForm />} />
-      </Routes>
+      <Navbar>
+        <Routes>
+          <Route path="/auth" element={<AuthForm />} />
+        </Routes>
+      </Navbar>
     </BrowserRouter>
   );
 };

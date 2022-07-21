@@ -25,28 +25,32 @@ const AuthForm = () => {
   };
 
   return (
-    <FormWrapper onFinish={onSubmitForm}>
-      <h3>로그인</h3>
-      <Input
-        name="user-email"
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={onChangeEmail}
-        required
-      />
-      <Input
-        name="password"
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={onChangePassword}
-        required
-      />
-      <Button type="primary" htmlType="submit" loading={loginLoading}>
-        로그인
-      </Button>
-    </FormWrapper>
+    <TemplateBlock>
+      <WhiteBox>
+        <FormWrapper onFinish={onSubmitForm}>
+          <h3>로그인</h3>
+          <Input
+            name="user-email"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={onChangeEmail}
+            required
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={onChangePassword}
+            required
+          />
+          <Button type="primary" htmlType="submit" loading={loginLoading}>
+            로그인
+          </Button>
+        </FormWrapper>
+      </WhiteBox>
+    </TemplateBlock>
   );
 };
 export default AuthForm;
