@@ -13,6 +13,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    /* login */
     builder.addCase(UserService.login.pending, (state, action) => {
       console.log('pending');
       state.loginLoading = true;
@@ -26,6 +27,22 @@ export const userSlice = createSlice({
     builder.addCase(UserService.login.rejected, (state, action) => {
       state.loginLoading = false;
       state.userData = [];
+      state.loginError = action.error;
+    });
+    /* getUser */
+    builder.addCase(UserService.getUser.pending, (state, action) => {
+      console.log('pending');
+      state.loginLoading = true;
+    });
+    builder.addCase(UserService.getUser.fulfilled, (state, action) => {
+      console.log(' action.payload ', action.payload);
+      state.userData = action.payload;
+      state.loginLoading = false;
+      console.log('UserService.getUser : ', UserService.getUser);
+    });
+    builder.addCase(UserService.getUser.rejected, (state, action) => {
+      state.loginLoading = false;
+      state.userData = initialState.userData;
       state.loginError = action.error;
     });
   },

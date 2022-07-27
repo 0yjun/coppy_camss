@@ -7,7 +7,8 @@ import AuthForm from '../component/AuthForm';
 import { useSelector } from 'react-redux';
 import isAdmin from './lib/hook/isAdmin';
 import Navbar from '../component/Navbar';
-const App = () => {
+import 'antd/dist/antd.css';
+const App = ({ children }: any) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { loginData } = useSelector((state: any) => state.user);
@@ -20,16 +21,14 @@ const App = () => {
   }, []);
 
   const { userData, loginLoading } = useSelector((state: any) => state.user);
-  const [value, bool] = isAdmin();
-  console.log('bool : ', bool);
+  console.log(isAdmin());
 
   return (
     <BrowserRouter>
-      <Navbar>
-        <Routes>
-          <Route path="/auth" element={<AuthForm />} />
-        </Routes>
-      </Navbar>
+      <Routes>
+        <Route path="/auth" element={<AuthForm />} />
+      </Routes>
+      <Navbar>{children}</Navbar>
     </BrowserRouter>
   );
 };

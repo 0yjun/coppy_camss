@@ -3,9 +3,15 @@ import client from '../lib/api/client';
 export const UserService = {
   getUser: createAsyncThunk(
     'user/getuser',
-    async (userId: string, thunkApi) => {
-      const { data } = await client.get(`/user/user:${userId}`);
-      return data;
+    async (userId: string, { rejectWithValue }) => {
+      try {
+        const response = await client.get(`/user/user:${userId}`);
+        console.log('서버에서 받아온 데이터 : ', response.data);
+        return response.data;
+      } catch (error: any) {
+        console.log('error is ', error);
+        return rejectWithValue(error.response.data);
+      }
     },
   ),
   login: createAsyncThunk(
