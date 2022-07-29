@@ -9,12 +9,15 @@ const Navbar = ({ children }) => {
 
   const menuItems = [
     {
-      label: <Link to="/">Coppy Camss</Link>,
+      label: <Link to="/">등록</Link>,
       key: 'main',
+      category: 'insert',
+      menuNm: '등록',
     },
     {
       label: <Link to="/main2">Coppy Camss</Link>,
       key: 'main2',
+      category: 'insert',
     },
     {
       label: <Link to="/main3">Coppy Camss</Link>,
@@ -25,7 +28,7 @@ const Navbar = ({ children }) => {
     <div>
       <Menu mode="horizontal" defaultSelectedKeys={['mail']}>
         {menuItems.map((v, i) => (
-          <Menu.Item key={v.key}>{v.label}</Menu.Item>
+          <Menu.Item key={v.key}>{v.category}</Menu.Item>
         ))}
       </Menu>
       {children}

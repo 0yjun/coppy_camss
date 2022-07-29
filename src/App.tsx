@@ -7,6 +7,7 @@ import AuthForm from '../component/AuthForm';
 import { useSelector } from 'react-redux';
 import isAdmin from './lib/hook/isAdmin';
 import Navbar from '../component/Navbar';
+import ComnCode from '../component/ComnCode';
 import 'antd/dist/antd.css';
 const App = ({ children }: any) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,10 +26,11 @@ const App = ({ children }: any) => {
 
   return (
     <BrowserRouter>
+      <Navbar>{children}</Navbar>
       <Routes>
         <Route path="/auth" element={<AuthForm />} />
+        <Route path="/comn-code" element={<ComnCode />} />
       </Routes>
-      <Navbar>{children}</Navbar>
     </BrowserRouter>
   );
 };
