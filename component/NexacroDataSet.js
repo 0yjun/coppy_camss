@@ -8,7 +8,9 @@ const NexacroDataSet = data => {
   };
 
   DataSet.Rows = Object.values(data);
-  const getCount = () => NexacroDataSet.Rows.length();
+  function getCount() {
+    return NexacroDataSet.Rows.length();
+  }
 
   return DataSet;
 };

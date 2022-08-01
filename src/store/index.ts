@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
+import datasetSlice from './slice/datasetSlice';
 import userSlice from './slice/userSlice';
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
+  dataset: datasetSlice.reducer,
 });
 
 const logger = createLogger();

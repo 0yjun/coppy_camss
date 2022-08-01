@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
+    "baseUrl": "src", // 루트 폴더 url
     "outDir": "./dist",
     "moduleResolution": "node"
   },
@@ -20,7 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "component/AuthForm.jsx",
-    "component/ComnCode.jsx",
+    "component/ComnCode.tsx",
     "src/lib/common/Grid.jsx",
     "src/lib/common/Grid.jsx"
   ]
