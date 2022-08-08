@@ -1,57 +1,57 @@
+import fetch from '../src/lib/api/fetch';
+import useSWR from 'swr';
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
+import client from 'lib/api/client';
 import { Button, Table } from 'antd';
-import React, { Component, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { UserService } from '../src/service/userService';
-import { DatasetService } from '../src/service/datasetService';
-import { AppDispatch } from '../src/store';
-import { useAppSelector } from '../src/store/hook';
-import { datasetSlice } from '../src/store/slice/datasetSlice';
+import { useData } from '../src/lib/hook/useSWR';
+import CostomTable from './CostomTable';
+
+const columns = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: 'rowtype',
+    dataIndex: 'rowtype',
+    key: 'rowtype',
+  },
+];
 
 const ComnCode = () => {
-  const { data, dataLoading } = useAppSelector(state => state.dataset);
-
-  const dispatch = useDispatch();
-
-  const onSearch = () => {
-    dispatch(DatasetService.onSearch({ url: 'comncode/dataset' }));
-  };
-  const onSearch2 = () => {
-    dispatch(DatasetService.onSearch({ url: 'comncode/dataset2' }));
-  };
-  const onAdd = () => {
-    dispatch(datasetSlice.actions.onAdd());
-  };
-  useEffect(() => {
-    console.log('data  ', data);
-  }, [data]);
-
-  const columns = [
-    {
-      title: 'id',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'rowtype',
-      dataIndex: 'rowtype',
-      key: 'rowtype',
-    },
+  const data1 = [
+    { id: '1', rowtype: '2' },
+    { id: '2', rowtype: '2' },
   ];
+  const data2 = [
+    { id: 'hello', rowtype: '2' },
+    { id: 'wold', rowtype: '2' },
+  ];
+  const [dataSource1, setDataSource1] = useState(data1);
+  const [dataSource2, setDataSource2] = useState(data2);
+  const onAdd = e => {
+    setDataSource1([...dataSource1, { rowtype: '2' }]);
+  };
+
+  const onRowPosChange = () => {
+    console.log('this', this.rowposition);
+  };
+  const highFunction = text => {
+    console.log(text);
+  };
+  const tableRef = useRef();
   return (
     <div>
-      <Button onClick={onSearch}>data</Button>
-      <Button onClick={onSearch2}>data2</Button>
-      <Button onClick={onAdd}>add</Button>
-      {data && data.map((v, i) => <div>{v.id}</div>)}
-      {data && (
-        <Table
-          rowKey="uid"
-          dataSource={data}
-          columns={columns}
-          loading={dataLoading}
-        />
-      )}
+      <CostomTable
+        tableRef={tableRef}
+        onRowPosChange={onRowPosChange}
+        propFunction={highFunction}
+        onAdd={onAdd}
+        dataSource={dataSource1}
+      ></CostomTable>
+      <CostomTable onAdd={onAdd} dataSource={dataSource2}></CostomTable>
     </div>
   );
 };

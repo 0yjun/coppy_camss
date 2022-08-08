@@ -17,6 +17,10 @@ export const datasetSlice = createSlice({
       console.log('state data : ', state.data);
       state.data.push({ rowtype: '2' });
     },
+    onDelete(state) {
+      console.log('state data : ', state.data);
+      state.data.push({ rowtype: '4' });
+    },
   },
   extraReducers: builder => {
     /* onSearch */
@@ -33,10 +37,6 @@ export const datasetSlice = createSlice({
       state.dataLoading = false;
       state.data = [];
       state.dataError = action.error;
-    });
-    builder.addCase(onAdd, (state, action) => {
-      console.log('state data : ', state.data);
-      state.data.push({ rowtype: '2' });
     });
   },
 });
