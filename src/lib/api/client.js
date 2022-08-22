@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 const client = axios.create();
-
 client.defaults.baseURL = 'http://localhost:4000';
 
-axios.interceptors.response.use(
+client.interceptors.response.use(
   response => {
     //todo
     return response;
@@ -13,6 +12,7 @@ axios.interceptors.response.use(
     //todo
     return error;
   },
+  post => {},
 );
 
 export default client;

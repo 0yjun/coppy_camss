@@ -11,14 +11,13 @@ type propstype = {
 };
 const Combo = forwardRef(
   (props: propstype, ref: React.ForwardedRef<HTMLSelectElement>) => {
-    console.log('자식 컴포넌트 Cat');
     console.log(ref);
     const { url } = props;
 
     return (
       <div>
         <select ref={ref}>
-          <option>hello</option>
+          <option>{url}1</option>
         </select>
       </div>
     );

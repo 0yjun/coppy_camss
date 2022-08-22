@@ -12,15 +12,6 @@ import 'antd/dist/antd.css';
 const App = ({ children }: any) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { loginData } = useSelector((state: any) => state.user);
-
-  const getUser = async () => {
-    dispatch(UserService.getUser('1'));
-  };
-  useEffect(() => {
-    getUser();
-  }, []);
-
   const { userData, loginLoading } = useSelector((state: any) => state.user);
   console.log(isAdmin());
 
