@@ -20,7 +20,7 @@ const App = ({ children }: any) => {
       <Navbar>{children}</Navbar>
       <Routes>
         <Route path="/auth" element={<AuthForm />} />
-        <Route path="/comn-code" element={<ComnCode />} />
+        <Route path="/comn" element={<ComnCode />} />
       </Routes>
     </BrowserRouter>
   );

@@ -19,24 +19,15 @@ const ComnCode = () => {
   const ref = useRef(null);
   const { pathname } = useLocation();
   console.log('url : ', pathname);
-  const getAxios = () => {
-    let data = [
-      { cd: '1', upCd: '2' },
-      { cd: '1', upCd: '2' },
-    ];
-    axios.defaults.baseURL = 'http://localhost:4000';
-    axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
-    axios.defaults.headers.post['Content-Type'] =
-      'application/x-www-form-urlencoded';
-    return axios.post('/comn/comncode', { data });
-  };
-
+  let [data, setData] = useState([{ id: '1' }]);
+  useEffect(() => {
+    console.log('data check ', data);
+  }, [data]);
   return (
     <>
-      <Button onClick={getAxios}>axios done</Button>
       <Combo ref={ref} url={pathname}></Combo>
-      <SearchBar>
-        <input id="cd" value="1" />
+      <SearchBar setData={setData}>
+        <input id="cd" value="usr01" />
         <input id="upCd" value="2" />
         <div id="test3">hello3</div>
       </SearchBar>
