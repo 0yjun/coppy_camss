@@ -3,23 +3,13 @@ import axios from 'axios';
 import client from '../src/lib/api/client';
 import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Validator } from './validator';
 
 const SearchBar = (props: any) => {
   const { searchBtn } = props;
   const { setData } = props;
   const searchBarRef = useRef<any>(null);
   const { pathname } = useLocation();
-
-  type validator = {
-    COL_NM: string;
-    MSG: string;
-    OPTION: string;
-  };
-  const confirmSave = (array: Array<object>, validator: validator) => {
-    array.every((el: object) => {
-      el.hasOwnProperty(validator.COL_NM);
-    });
-  };
 
   const fn_search = async (e: any) => {
     const childrenNodes = searchBarRef.current.children;
@@ -29,26 +19,34 @@ const SearchBar = (props: any) => {
         option[item.id] = item.value;
       }
     }
+    const validator = new Validator(
+      [
+        {
+          COL_NM: 'cd',
+          MSG: '코드를 입력학세요',
+          OPTION: 'required',
+          VALUE: 60,
+          TYPE: '',
+        },
+        {
+          COL_NM: 'upCd',
+          MSG: '상위코드를 입력학세요',
+          OPTION: 'max',
+          VALUE: 100,
+          TYPE: 'string',
+        },
+      ],
+      [{ cd: 'usr01' }, { cd: 'usr02' }, { cd: 'usr03', upCd: 'usr' }],
+    );
+    console.log('validator.validate()', validator.isValid());
     const param = JSON.stringify(option)
       .replace(/{|}|"/gi, '')
       .replace(/:/gi, '=')
       .replace(/,/gi, '&&');
     console.log(param);
     try {
-      //const response = await client.get(`/${pathname}?${param}`);
       const response = await client.get(`/comn/comncode?${param}`);
-      //const saveResponse = await client.post(`/comn/comncode/save`, [
-      //   { cd: 'test03', cdNm: 'test코드3' },
-      //   { cd: 'test04', cdNm: 'test코드4' },
-      // ]);
       console.log('response : ', response);
-      /*테스트 실행*/
-      confirmSave(response.data, {
-        COL_NM: 'cd',
-        MSG: '코드는 필수입니다',
-        OPTION: 'required',
-      });
-      /*테스트 종료*/
       setData(response.data);
     } catch (error) {
       console.log('error : ', error);
