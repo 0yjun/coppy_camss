@@ -8,8 +8,11 @@ type ComboType = {
 };
 
 const SearchBar = (props: any) => {
-  console.log("children", props.children);
-  const onSearch = (e: any) => {};
+  const { children } = props;
+
+  const onSearch = (e: any) => {
+    e.preventDefault();
+  };
   return (
     <form>
       {props.children}
