@@ -1,27 +1,24 @@
+import { Layout } from "antd";
+import { Content, Footer, Header } from "antd/lib/layout/layout";
+import Sider from "antd/lib/layout/Sider";
 import { ReflexContainer, ReflexElement, ReflexSplitter } from "react-reflex";
 import "react-reflex/styles.css";
-
+import AppLayout from "../../component/AppLayout";
+import Splitter from "../../component/Splitter";
+import MenuComp from "../../component/MenuComp";
 const Menu = () => {
   return (
-    <>
-      <ReflexContainer orientation="vertical">
-        <ReflexElement className="left-pane" propagateDimensions={true}>
-          <div>왼쪽 컴포넌트</div>
-        </ReflexElement>
-        <ReflexSplitter
-          className="splitter"
-          style={{ backgroundColor: "#ccdff2", width: "10px" }}
-        >
-          <div className="splitter"></div>
-        </ReflexSplitter>
-        <ReflexElement className="right-pane" minSize={10} maxSize={800}>
-          <div>
-            오른쪽 컴포넌트 hello hello hello hello hello hello hello hello
-            hello
-          </div>
-        </ReflexElement>
-      </ReflexContainer>
-    </>
+    <div style={{ bottom: "0" }}>
+      <AppLayout>
+        <Splitter
+          firstComponent={<MenuComp />}
+          secondComponent={<div>right</div>}
+          maxSize={[1000, 1000]}
+          minSize={[100, 100]}
+          orientation="vertical"
+        />
+      </AppLayout>
+    </div>
   );
 };
 

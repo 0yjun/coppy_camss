@@ -16,16 +16,21 @@ const Combo = forwardRef(
       console.log(data);
     }, [data]);
     return (
-      <select>
-        {mode === "a" && <option>전체</option>}
-        {data &&
-          data.map((item: any, index: number) => (
-            <option value={item.cd} key={index}>
-              {item.cdNm}
-            </option>
-          ))}
-      </select>
+      <div>
+        {error && <div>no data found</div>}
+        {data && !error && (
+          <select>
+            {mode === "a" && <option>전체</option>}
+            {data.map((item: any, index: number) => (
+              <option value={item.cd} key={index}>
+                {item.cdNm}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
     );
   }
 );
+Combo.displayName = "Combo";
 export default Combo;
