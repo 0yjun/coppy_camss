@@ -24,8 +24,11 @@ const Menu = () => {
         <Button type="primary">primary</Button>
         <SearchArea
           row={[
-            ["hello", "wold"],
-            ["hello", "wolds", "hello"],
+            [
+              { name: "test", type: "input", required: "true" },
+              { name: "text" },
+            ],
+            [{ name: "text" }, { name: "text" }, { name: "text" }],
           ]}
         ></SearchArea>
         <Splitter
