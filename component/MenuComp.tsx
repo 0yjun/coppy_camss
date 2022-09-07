@@ -5,28 +5,17 @@ import useSWR from "swr";
 import fetcher from "../lib/fetcher";
 
 const MenuComp = () => {
-  const { data, error } = useSWR(
-    "https://www.ag-grid.com/example-assets/olympic-winners.json",
-    fetcher
-  );
+  const { data, error } = useSWR("/comn/comncd", fetcher);
 
   const columnDefs = useMemo(
     () => [
-      { field: "athlete", width: 150 },
-      { field: "age", width: 90 },
-      { field: "country", width: 150 },
-      { field: "year", width: 90 },
-      { field: "date", width: 150 },
-      { field: "sport", width: 150 },
-      { field: "gold", width: 100 },
-      { field: "silver", width: 100 },
-      { field: "bronze", width: 100 },
-      { field: "total", width: 100 },
+      { field: "cd", width: 150, name: "상위코드" },
+      { field: "cdNm", width: 150, name: "코드명" },
     ],
     []
   );
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100vh", border: "1px solid gray" }}>
       <AgGridReact rowData={data} columnDefs={columnDefs}></AgGridReact>
     </div>
   );
