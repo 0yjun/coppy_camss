@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/antd.less";
 import type { AppProps } from "next/app";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";

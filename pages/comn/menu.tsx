@@ -24,7 +24,7 @@ const Menu = () => {
         <Button type="primary">primary</Button>
         <SearchArea
           row={[
-            ["hello", "wold"],
+            ["hello", ["hello", "1wold"]],
             ["hello", "wolds", "hello"],
           ]}
         ></SearchArea>
