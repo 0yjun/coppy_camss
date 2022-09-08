@@ -24,8 +24,16 @@ const Menu = () => {
         <Button type="primary">primary</Button>
         <SearchArea
           row={[
+<<<<<<< HEAD
             ["hello", ["hello", "1wold"]],
             ["hello", "wolds", "hello"],
+=======
+            [
+              { name: "test", type: "input", required: "true" },
+              { name: "text" },
+            ],
+            [{ name: "text" }, { name: "text" }, { name: "text" }],
+>>>>>>> 8749433e501fdf5149492a31abd04d6fac7f5daf
           ]}
         ></SearchArea>
         <Splitter
