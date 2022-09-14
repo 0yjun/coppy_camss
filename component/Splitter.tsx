@@ -27,7 +27,7 @@ const Spliter = ({
         {firstComponent}
       </ReflexElement>
       <ReflexSplitter propagate={true}>
-        <div style={{ visibility: "hidden" }}>1</div>
+        <div style={{ visibility: "hidden" }}>1111</div>
       </ReflexSplitter>
       <ReflexElement
         className="right-pane"
