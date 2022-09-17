@@ -4,7 +4,7 @@ import Sider from "antd/lib/layout/Sider";
 import { ReflexContainer, ReflexElement, ReflexSplitter } from "react-reflex";
 import "react-reflex/styles.css";
 
-import AppLayout from "../../component/AppLayout";
+import AppLayout from "component/AppLayout";
 import Splitter from "../../component/Splitter";
 import MenuComp from "../../component/MenuComp";
 import { useRef, useState } from "react";
