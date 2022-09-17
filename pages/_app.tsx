@@ -7,9 +7,10 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 
 import "react-reflex/styles.css";
 import "antd/dist/antd.css";
+import wrapper from "reducers/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
