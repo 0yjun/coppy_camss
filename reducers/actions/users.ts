@@ -19,6 +19,15 @@ export const logInAction = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk("users", async () => {
+  try {
+    const res = await client.get("users");
+    return res.data;
+  } catch (error: any) {
+    return error.message;
+  }
+});
+
 export const signInAction = createAsyncThunk(
   "ADD_USER",
   async (data: any, { rejectWithValue }) => {

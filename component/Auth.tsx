@@ -1,24 +1,34 @@
 import { Button, Form, Input } from "antd";
 import client from "lib/client";
 import { format } from "path";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { signInAction } from "reducers/actions/users";
+import { getUser, signInAction } from "reducers/actions/users";
 
 const Auth = (props: any) => {
   const users = useSelector((state: any) => state.users);
-  const { isSignError } = users;
+  const { user, isSignError } = users;
   const dispatch = useDispatch<any>();
   const onSubmit = (values: any) => {
-    console.log(isSignError);
     dispatch(signInAction(values));
+    console.log("user : ", user);
   };
-
+  useEffect(() => {
+    dispatch(getUser());
+    console.log("user : ", user);
+  }, []);
   return (
     <Form onFinish={onSubmit}>
       <Form.Item
         label="username"
         name="userId"
+        rules={[{ required: true, message: "please input your username!" }]}
+      >
+        <Input placeholder="username" />
+      </Form.Item>
+      <Form.Item
+        label="부서명"
+        name="deptCd"
         rules={[{ required: true, message: "please input your username!" }]}
       >
         <Input placeholder="username" />

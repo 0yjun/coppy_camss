@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logInAction, logOutAction, signInAction } from "../actions/users";
+import {
+  getUser,
+  logInAction,
+  logOutAction,
+  signInAction,
+} from "../actions/users";
 
 export interface IUser {
   isLoggedIn: boolean;
@@ -40,6 +45,19 @@ export const users = createSlice({
         state.user = action.payload;
       })
       .addCase(signInAction.rejected, (state, action) => {
+        state.isSignIn = false;
+        state.loggedInError = action.payload;
+      })
+
+      /** getUser */
+      .addCase(getUser.pending, (state, action) => {
+        state.isSignIn = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isSignIn = false;
+        state.user = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.isSignIn = false;
         state.loggedInError = action.payload;
       }),
